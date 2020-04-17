@@ -48,7 +48,7 @@ Now we are ready for finding degenerate primers (using the output file from Trim
 
 DegePrime can also output coverage among taxonomic groups, if a file with taxonomic information for the sequences is provided:
 
-`perl DegePrime.pl -i <TRIMMED_ALIGNMENT_FILE> -d <MAX_DEGENERACY> -l <OLIGOMER_LENGTH> -l <OLIGOMER_LENGTH> -taxfile <TAXONOMY_FILE> -taxlevel <TAXONOMY_LEVEL> -o <OUTPUT_FILE>`
+```perl DegePrime.pl -i <TRIMMED_ALIGNMENT_FILE> -d <MAX_DEGENERACY> -l <OLIGOMER_LENGTH> -l <OLIGOMER_LENGTH> -taxfile <TAXONOMY_FILE> -taxlevel <TAXONOMY_LEVEL> -o <OUTPUT_FILE>```
 
 #### Output ####
 

@@ -10,16 +10,15 @@ DegePrime is a program that for each position in a multiple sequence alignment f
 
 ### 2. Usage ###
 
-Input files
+#### Input files ####
 
-1) As input, an alignment file in fasta format is required. Gaps should be indicated by "-". Gaps in the start and end of a sequence can be indicated by "." or "_". All sequences must be of the same length (including gaps).
+As input, an alignment file in fasta format is required. Gaps should be indicated by "-". Gaps in the start and end of a sequence can be indicated by "." or "_". All sequences must be of the same length (including gaps).
 
-
-Running
+#### Running ####
 
 "Spare me the details...":
 
- perl TrimAlignment.pl -i align_file -min cutoff -o trimmed_align_file
+`perl TrimAlignment.pl -i align_file -min cutoff -o trimmed_align_file`
 
  (-min 0.9 usually works well)
 

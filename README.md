@@ -45,24 +45,35 @@ Now we are ready for finding degenerate primers (using the output file from Trim
 
 `-d` should be a possible degeneracy, i.e. 1, 2, 3, 4, 6, 8, 9, 12, and so forth (or more generally, a number > 0 that can be expressed as 2^*i* * 3^*j*, where *i* and *j* are integers or 0).
 
-The output_file will be a tab-separated text file that includes the following columns:
+DegePrime can also output coverage among taxonomic groups, if a file with taxonomic information for the sequences is provided:
 
+`perl DegePrime.pl -i <TRIMMED_ALIGNMENT_FILE> -d <MAX_DEGENERACY> -l <OLIGOMER_LENGTH> -l <OLIGOMER_LENGTH> -taxfile <TAXONOMY_FILE> -taxlevel <TAXONOMY_LEVEL> -o <OUTPUT_FILE>`
 
--**Pos**:                Position of the (first base in the) window in the trimmed_align_file (starting at 0).
+The `<OUTPUT_FILE>` will be a tab-separated text file that includes the following columns:
 
-*NumberSpanning*:		   Number of sequences that span this window (including sequences with internal gaps in this region).
+**Pos**:                Position of the (first base in the) window in the trimmed_align_file (starting at 0).
 
-*UniqueMers*:         Number of unique oligomer sequences (without in/dels) in the window.
+**NumberSpanning**:		   Number of sequences that span this window (including sequences with internal gaps in this region).
 
-*Entropy*:            Entropy of the window, calculated as -Σ Pi log2(Pi), where Pi is the frequency of oligomer i.  
+**UniqueMers**:         Number of unique oligomer sequences (without in/dels) in the window.
 
-*PrimerDeg*:          Degeneracy of the selected primer.
+**Entropy**:            Entropy of the window, calculated as -Σ Pi log2(Pi), where Pi is the frequency of oligomer i.  
 
-*PrimerSeq*:          Sequence of the selected degenerate primer.
+**PrimerDeg**:          Degeneracy of the selected primer.
 
-*NumberMatching*:		   Number of sequences that match the selected primer.
+**PrimerSeq**:          Sequence of the selected degenerate primer.
 
-*FractionMatching*:   Fraction of spanning sequences that match the selected primer (NumberMatching/NumberSpanning).
+**NumberMatching**:		   Number of sequences that match the selected primer.
+
+**FractionMatching**:   Fraction of spanning sequences that match the selected primer (NumberMatching/NumberSpanning).
+
+If a <TAXONOMY_FILE> was provided, the following columns will also be output for each taxon:
+
+**Spanning TaxonX**:    Number of sequences for TaxonX that span this window (including sequences with internal gaps in this region). 
+
+**Matching TaxonX**:    Number of sequences for TaxonX that match the selected primer.
+
+**Fraction TaxonX**:    Fraction of spanning sequences for TaxonX that match the selected primer (NumberMatching/NumberSpanning).
 
 
 For more help and additional optional parameters for the scripts, use -h: 

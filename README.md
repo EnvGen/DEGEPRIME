@@ -49,6 +49,8 @@ DegePrime can also output coverage among taxonomic groups, if a file with taxono
 
 `perl DegePrime.pl -i <TRIMMED_ALIGNMENT_FILE> -d <MAX_DEGENERACY> -l <OLIGOMER_LENGTH> -l <OLIGOMER_LENGTH> -taxfile <TAXONOMY_FILE> -taxlevel <TAXONOMY_LEVEL> -o <OUTPUT_FILE>`
 
+#### Output ####
+
 The `<OUTPUT_FILE>` will be a tab-separated text file that includes the following columns:
 
 **Pos**:                Position of the (first base in the) window in the trimmed_align_file (starting at 0).
@@ -75,6 +77,7 @@ If a <TAXONOMY_FILE> was provided, the following columns will also be output for
 
 **Fraction TaxonX**:    Fraction of spanning sequences for TaxonX that match the selected primer (NumberMatching/NumberSpanning).
 
+#### More help ####
 
 For more help and additional optional parameters for the scripts, use -h: 
 

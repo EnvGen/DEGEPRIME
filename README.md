@@ -53,15 +53,16 @@ Now we are ready for finding degenerate primers (using the output file from Trim
 
 The output_file will be a tab-separated text file that includes the following columns:
 
-Pos	TotalSeq	UniqueMers	Entropy	PrimerDeg	PrimerMatching	PrimerSeq
+Pos	NumberSpanning	UniqueMers	Entropy	PrimerDeg	PrimerSeq   NumberMatching  FractionMatching
 
-Pos: 			Position of the (first base in the) window in the trimmed_align_file (starting at 0).
-TotalSeq:		Number of sequences that span this window (including sequences with internal gaps in this region).
-UniqueMers:		Number of unique oligomer sequences (without in/dels) in the window.
-Entropy: 		Entropy of the window, calculated as -Σ Pi log2(Pi), where Pi is the frequency of oligomer i.  
-PrimerDeg:		Degeneracy of the selected primer.
-PrimerMatching:		Number of sequences that match the selected primer.
-PrimerSeq:		Sequence of the selected degenerate primer.
+Pos:                Position of the (first base in the) window in the trimmed_align_file (starting at 0).
+NumberSpanning:		Number of sequences that span this window (including sequences with internal gaps in this region).
+UniqueMers:         Number of unique oligomer sequences (without in/dels) in the window.
+Entropy:            Entropy of the window, calculated as -Σ Pi log2(Pi), where Pi is the frequency of oligomer i.  
+PrimerDeg:          Degeneracy of the selected primer.
+PrimerSeq:          Sequence of the selected degenerate primer.
+NumberMatching:		Number of sequences that match the selected primer.
+FractionMatching:   Fraction of spanning sequences that match the selected primer (NumberMatching/NumberSpanning).
 
 
 For more help and additional optional parameters for the scripts, use -h: 

@@ -47,9 +47,9 @@ Now we are ready for finding degenerate primers (using the output file from Trim
 
 The output_file will be a tab-separated text file that includes the following columns:
 
-*Pos	NumberSpanning	UniqueMers	Entropy	PrimerDeg	PrimerSeq   NumberMatching  FractionMatching*
+**Pos	NumberSpanning	UniqueMers	Entropy	PrimerDeg	PrimerSeq   NumberMatching  FractionMatching**
 
-*Pos*:                Position of the (first base in the) window in the trimmed_align_file (starting at 0).
+**-Pos**:                Position of the (first base in the) window in the trimmed_align_file (starting at 0).
 
 *NumberSpanning*:		   Number of sequences that span this window (including sequences with internal gaps in this region).
 

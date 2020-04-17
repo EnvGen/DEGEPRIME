@@ -12,7 +12,7 @@ DegePrime is a program that for each position in a multiple sequence alignment f
 
 ### 2. Installation ###
 
-Download the latest DegePrime distribution from https://github.com/EnvGen/DEGEPRIME/releases and extract the files. You need to have Perl installed on your computer to run DegePrime. When running it, either move to the directory where you have put the files, or give the path to the files when running, i.e. `perl path/to/DegePrime.pl ...`
+Download the latest DegePrime distribution from https://github.com/EnvGen/DEGEPRIME/releases and extract the files. You need to have Perl installed on your computer to run DegePrime. Either run it from the directory where you have put the files, or give the path to the files when running, i.e. `perl path/to/DegePrime.pl ...`
 
 ### 3. Usage ###
 

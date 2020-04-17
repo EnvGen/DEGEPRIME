@@ -8,33 +8,35 @@ DegePrime.pl - Finds degenerate oligomers of as high coverage as possible at eve
 
 =head1 USAGE
 
-perl degeprime.pl -i ALIGNMENT_FILE -l OLIGOMER_LENGTH -d MAX_DEGENERACY -o OUTPUT_FILE [-depth MIN_DEPTH] [-skip SKIP_LENGTH] [-iter NUMBER_ITERATIONS] [-taxfile TAXONOMY_FILE] [-taxlevel TAXONOMY_LEVEL] [-h]
+perl degeprime.pl -i <ALIGNMENT_FILE> -l <OLIGOMER_LENGTH> -d <MAX_DEGENERACY> -o <OUTPUT_FILE> [-depth <MIN_DEPTH>] [-skip <SKIP_LENGTH>] [-iter <NUMBER_ITERATIONS>] [-taxfile <TAXONOMY_FILE>] [-taxlevel <TAXONOMY_LEVEL>] [-h]
 
 
 =head1 POSITIONAL ARGUMENTS
 
--i ALIGNMENT_FILE			Specify alignment file. This has some special requirements, see README
+-i <ALIGNMENT_FILE>			Specify alignment file. This has some special requirements, see README
 
--l OLIGOMER_LENGTH			Specify oligomer length (an integer)
+-l <OLIGOMER_LENGTH>		Specify oligomer length (integer)
 
--d MAX_DEGENERACY			Specify maximum degeneracy of oligomer (an integer)
+-d <MAX_DEGENERACY>			Specify maximum degeneracy of oligomer (integer)
 
--o OUTPUT_FILE				Specify output file name (overwrites existing file with same name)
+-o <OUTPUT_FILE>			Specify output file name (overwrites existing file with same name)
 
 
 =head1 OPIONAL ARGUMENTS
 
--depth MIN_DEPTH			Specify minimum number of spanning sequences without in/dels for a window position to be included in analysis, default 1
+-depth <MIN_DEPTH>			Specify minimum number of spanning sequences without in/dels for a window position to be included in analysis, default 1
 
--skip SKIP_LENGTH			Specify number of bases in ends of sequences that will not be considered in analysis, default 20
+-skip <SKIP_LENGTH>			Specify number of bases in start and end of sequences that will not be considered in analysis, default 20
 
--iter NUMBER_ITERATIONS		Specify number of iterations during Weighted Randomised Merging, default 100
+-iter <NUMBER_ITERATIONS>	Specify number of iterations during Weighted Randomised Merging, default 100
 
--taxfile TAXONOMY_FILE		Specify file with taxonomic annotations for the sequences in the alignment file. This is required if TAXONOMY_LEVEL is given 
+-taxfile <TAXONOMY_FILE>	Specify file with taxonomic annotations for the sequences in the alignment file. This is required if <TAXONOMY_LEVEL> is given
 
--taxlevel TAXONOMY_LEVEL	Specify what taxonomic level to use (a positive integer). This is required if TAXONOMY_FILE is given
+-taxlevel <TAXONOMY_LEVEL>	Specify what taxonomic level to use (a positive integer). This is required if <TAXONOMY_FILE> is given
 
--h							Print this help message
+-h							Prints this help message
+
+[Press q to close this help message]
 
 =cut
 
@@ -137,14 +139,13 @@ sub check_max_deg {
 sub calc_coverage {
 	print"Finding primers\n";
 	open (OUT, ">$outfile");
-	print OUT "Pos\tTotalSeq\tUniqueMers\tEntropy\tPrimerDeg\tPrimerMatching\tPrimerSeq";
+	print OUT "Pos\tNumberSpanning\tUniqueMers\tEntropy\tPrimerDeg\tPrimerSeq\tNumberMatching\tFractionMatching";
 	if ($taxonomy_level) {
 		foreach $taxon (@taxa) {
-			print OUT "\tTotal $taxon";
-			print OUT "\tMatched $taxon";
+			print OUT "\tSpanning $taxon\tMatching $taxon\tFraction $taxon";
 		}
 	}
-	print OUT "\n";
+    print OUT "\n";
 	for ($pos = 0; $pos <= ($seq_length - $window_length); $pos++) {
 	#for ($pos = 385; $pos <= 385; $pos++) {
 	#for ($pos = 470; $pos <= 519; $pos++) {
@@ -266,6 +267,7 @@ sub weighted_randomised_combination {
 	local($bestdeg) = "";
 	local($adjust_counts);
 	local($adjust_index);
+    local($fraction_match);
 	# Make list from which to make random draws:
 	$end_indices[0] = $mer_count{ $sorted_mer[0] };
 	for ($i = 1; $i < @sorted_mer; $i++) {
@@ -378,6 +380,11 @@ sub weighted_randomised_combination {
 			@best_primers = (keys %{$pos_n_primers{$window_length - 1}});
 		}
 	}
+    if ($total_spanning > 0) {
+        $fraction_match = $bestmatch/$total_spanning;
+    } else {
+        $fraction_match = "NA";
+    }
 	if ($taxonomy_level) {
 		%taxon_counts_spanning = ();
 		%taxon_counts_matching = ();
@@ -389,7 +396,7 @@ sub weighted_randomised_combination {
 				$taxon_counts_matching{$id_taxon{$id}}++;
 			}
 		}
-		print OUT "\t$bestdeg\t$bestmatch\t$bestprimer";
+        print OUT "\t$bestdeg\t$bestprimer\t$bestmatch\t$fraction_match";
 		foreach $taxon (@taxa) {
 			if (defined $taxon_counts_spanning{$taxon}) {
 				print OUT "\t$taxon_counts_spanning{$taxon}";
@@ -397,13 +404,14 @@ sub weighted_randomised_combination {
 				print OUT "\t0";
 			}
 			if (defined $taxon_counts_matching{$taxon}) {
-				print OUT "\t$taxon_counts_matching{$taxon}";
+                $fraction_match = $taxon_counts_matching{$taxon}/$taxon_counts_spanning{$taxon};
+				print OUT "\t$taxon_counts_matching{$taxon}\t$fraction_match";
 			} else {
-				print OUT "\t0";
+				print OUT "\t0\tNA";
 			}
 		}
 	} else {
-		print OUT "\t$bestdeg\t$bestmatch\t$bestprimer";
+        print OUT "\t$bestdeg\t$bestprimer\t$bestmatch\t$fraction_match";
 	}
 }
 

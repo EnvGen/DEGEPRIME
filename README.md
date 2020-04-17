@@ -3,6 +3,7 @@
 ## Contents ##
 1. Overview
 2. Usage
+3. Citing DegePrime
 
 ### 1. Overview ###
 
@@ -89,7 +90,7 @@ For more help and additional optional parameters for the scripts, use -h:
 
  perl MakeSilvaTaxonomy.pl -h
 
-## Citing DegePrime ##
+## 3. Citing DegePrime ##
 
 Hugerth LH, Wefer HA, Lundin S, Jakobsson HE, Lindberg M, Rodin S, Engstrand L, Andersson AF (2014)
 [DegePrime, a Program for Degenerate Primer Design for Broad-Taxonomic-Range PCR in Microbial Ecology Studies](https://aem.asm.org/content/80/16/5116)

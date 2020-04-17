@@ -1,6 +1,6 @@
 #DegePrime
 
-##Content
+##Contents
 1. Overview
 2. Usage
 

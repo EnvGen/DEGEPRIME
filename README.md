@@ -22,7 +22,7 @@ As input, an alignment file in fasta format is required. Gaps should be indicate
 
 #### Running ####
 
-"Spare me the details...":
+"*Spare me the details...*":
 
 `perl TrimAlignment.pl -i <ALIGNMENT_FILE> -min cutoff -o <TRIMMED_ALIGNMENT_FILE>`
 
@@ -32,7 +32,7 @@ As input, an alignment file in fasta format is required. Gaps should be indicate
 
 (e.g. `-d 12 -l 18`)
 
-"Tell me more...":
+"*Tell me more...*":
 
 First, the alignment file has to be prepared by the script TrimAlignment.pl. There are two reasons for this. First, your alignment may include many positions with gaps in many of the sequences, especially if the alignment is based on a large number of sequences. Since DegePrime.pl will, in each window, only use those sequences that do not have gaps, this will be troublesome. With TrimAlignment.pl you can remove those columns in your alignment that are not occupied (have a nucleotide) in at least a defined proportion of sequences, set by the optional parameter -min :
 

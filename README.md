@@ -2,14 +2,19 @@
 
 ## Contents ##
 1. Overview
-2. Usage
-3. Citing DegePrime
+2. Installation
+3. Usage
+4. Citing DegePrime
 
 ### 1. Overview ###
 
 DegePrime is a program that for each position in a multiple sequence alignment finds a degenerate oligomer, of defined length and degeneracy, of as high coverage as possible (matching as many of the sequences as possible in that position). It hence attempts to solve the "maximum coverage degenerate primer design problem" (MC-DPD), and uses a novel heuristic for this. The main script is DegePrime.pl that performs the actual oligomer selection procedure. The script TrimAlignment.pl is used to prepare the alignment file and has to be run prior to DegePrime.pl. As an option, DegePrime.pl can output primer coverage among taxonomic groups of sequences, if a file with taxonomic information for the sequences is provided. Such a file can be generated from an RDP (http://rdp.cme.msu.edu/) file in genbank format by the script MakeRdpTaxonomy.pl or from a Silva (http://www.arb-silva.de/) file in fasta format with taxonomies in the sequence headers by the script MakeSilvaTaxonomy.pl.
 
-### 2. Usage ###
+### 2. Installation ###
+
+Download the latest DegePrime distribution from https://github.com/EnvGen/DEGEPRIME/releases and extract the files. You need to have Perl installed on your computer to run DegePrime. When running it, either move to the directory where you have put the files, or give the path to the files when running, i.e. `perl path/to/DegePrime.pl ...`
+
+### 3. Usage ###
 
 #### Input files ####
 
@@ -70,7 +75,7 @@ The `<OUTPUT_FILE>` will be a tab-separated text file that includes the followin
 
 **FractionMatching**:   Fraction of spanning sequences that match the selected primer (NumberMatching/NumberSpanning).
 
-If a <TAXONOMY_FILE> was provided, the following columns will also be output for each taxon:
+If a `<TAXONOMY_FILE>` was provided, the following columns will also be output for each taxon:
 
 **Spanning TaxonX**:    Number of sequences for TaxonX that span this window (including sequences with internal gaps in this region). 
 
@@ -90,7 +95,7 @@ For more help and additional optional parameters for the scripts, use -h:
 
  perl MakeSilvaTaxonomy.pl -h
 
-## 3. Citing DegePrime ##
+## 4. Citing DegePrime ##
 
 Hugerth LH, Wefer HA, Lundin S, Jakobsson HE, Lindberg M, Rodin S, Engstrand L, Andersson AF (2014)
 [DegePrime, a Program for Degenerate Primer Design for Broad-Taxonomic-Range PCR in Microbial Ecology Studies](https://aem.asm.org/content/80/16/5116)
